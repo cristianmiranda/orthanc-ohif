@@ -1,0 +1,42 @@
+version: "3.5"
+
+secrets:
+  orthanc.secret.json:
+    file: ./orthanc/config.json
+
+services:
+  orthanc-db:
+    image: postgres
+    container_name: orthanc-db
+    environment:
+      POSTGRES_PASSWORD: "pg-password"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+
+  orthanc:
+    image: osimis/orthanc
+    container_name: orthanc
+    depends_on:
+      - orthanc-db
+    ports:
+      - 8042:8042
+    environment:
+      VERBOSE_ENABLED: "true"
+      VERBOSE_STARTUP: "true"
+      DICOM_WEB_PLUGIN_ENABLED: "true"
+      OHIF_PLUGIN_ENABLED: "true"
+      AUTHORIZATION_PLUGIN_ENABLED: "true"
+    secrets:
+      - orthanc.secret.json
+
+  authenticator:
+    container_name: authenticator
+    build:
+      context: ./authenticator
+      dockerfile: Dockerfile
+    command: npm run dev
+    volumes:
+      - ./authenticator:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "8200:8200"

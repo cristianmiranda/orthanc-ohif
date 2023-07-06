@@ -1,0 +1,36 @@
+{
+    "Name": "Orthanc Server in Docker",
+    "RemoteAccessAllowed": true,
+    "AuthenticationEnabled": false,
+    "Plugins": [
+        "/usr/share/orthanc/plugins/"
+    ],
+    "DicomWeb": {
+        "Servers": {
+            "orthanc-dicom": {
+                "Url": "http://localhost:8042/dicom-web/",
+                "Timeout": 500,
+                "ChunkedTransfers": false
+            }
+        },
+        "Enable": true,
+        "Root": "/dicom-web",
+        "EnabeWado": true,
+        "WadoRoot": "/wado",
+        "Host": "localhost",
+        "StudiesMetadata": "MainDicomTags",
+        "SeriesMetadata": "MainDicomTags",
+        "MainDicomTags": "MainDicomTags",
+        "Ssl": false
+    },
+    "Authorization": {
+        "WebServiceRootUrl": "http://authenticator:8200/",
+        "TokenHttpHeaders": [
+            "auth-token",
+            "Referer"
+        ],
+        "TokenGetArguments": [
+            "auth-token"
+        ]
+    }
+}
