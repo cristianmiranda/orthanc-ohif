@@ -38,3 +38,9 @@ curl -H 'auth-token: 1234567890' 'http://localhost:8042/studies'
 
 curl 'http://localhost:8042/studies?auth-token=1234567890'
 ```
+
+### 🔐 Authorization
+
+Modify `authenticator/server.js` and implement custom validation logic.
+
+See more @ https://book.orthanc-server.com/plugins/authorization.html#web-service
