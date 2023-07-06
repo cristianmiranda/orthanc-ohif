@@ -14,9 +14,15 @@
 
 ### Usage
 
+1. Unzip `orthanc/demo-study.zip`
+
+2. Run the stack
+
 ```bash
 docker-compose up
 ```
+
+3. Upload the study manually (using the top right "Upload" button)
 
 ### Access OHIF Viewer fromm Orthanc
 
