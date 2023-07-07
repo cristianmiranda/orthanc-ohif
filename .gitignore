@@ -64,4 +64,4 @@ typings/
 # IDE & more
 .idea
 .DS_STORE
-postgres-data
+orthanc/db
