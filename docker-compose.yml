@@ -14,7 +14,7 @@ services:
       - ./orthanc/db:/var/lib/postgresql/data
 
   orthanc:
-    image: osimis/orthanc
+    image: orthancteam/orthanc
     container_name: orthanc
     depends_on:
       - orthanc-db
