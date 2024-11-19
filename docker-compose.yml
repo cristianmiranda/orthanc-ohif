@@ -26,6 +26,7 @@ services:
       DICOM_WEB_PLUGIN_ENABLED: "true"
       OHIF_PLUGIN_ENABLED: "true"
       AUTHORIZATION_PLUGIN_ENABLED: "true"
+      VOLVIEW_PLUGIN_ENABLED: "true"
     secrets:
       - orthanc.secret.json
 
