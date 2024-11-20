@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 app.post("/tokens/validate", (req, res) => {
   const orthancId = req.body["orthanc-id"];
   const tokenKey = req.body["token-key"];
-  const tokenValue = req.body["token-value"];
+  let tokenValue = req.body["token-value"];
   const uri = req.body["uri"];
 
   console.log("-------------------");
@@ -29,15 +29,33 @@ app.post("/tokens/validate", (req, res) => {
   console.log(`token-key: ${tokenKey}`);
   console.log(`token-value: ${tokenValue}`);
 
-  if (tokenKey === "auth-token" && isValid(tokenValue)) {
-    grant(res, true, 1);
-  } else if (
-    tokenKey === "Referer" &&
-    isValid(new URLSearchParams(new URL(tokenValue).search).get("auth-token"))
-  ) {
-    grant(res, true, 1);
-  } else {
-    grant(res, false, 0);
+  if (tokenKey === "Authorization" && tokenValue != null) {
+    tokenValue = tokenValue.replace("Bearer ", "");
+  }
+
+  switch (tokenKey) {
+    case "Authorization":
+      console.log("Checking Authorization token...");
+      if (isValid(tokenValue)) {
+        grant(res, true, 1);
+      }
+      break;
+    case "token":
+      console.log("Checking token token...");
+      if (isValid(tokenValue)) {
+        grant(res, true, 1);
+      }
+      break;
+    case "Referer":
+      console.log("Checking Referer token...");
+      if (isValid(new URLSearchParams(new URL(tokenValue).search).get("token"))) {
+        grant(res, true, 1);
+      }
+      break;
+    default:
+      console.log("Invalid token key");
+      grant(res, false, 0);
+      return;
   }
 });
 
@@ -63,5 +81,5 @@ function grant(res, granted, validity) {
 
 function isValid(token) {
   console.log(`Checking token...: ${token}`);
-  return true; // token === "1234567890";
+  return true; // return token === "1234567890";
 }
