@@ -8,11 +8,12 @@
     "Authorization": {
         "WebServiceRootUrl": "http://authenticator:8200/",
         "TokenHttpHeaders": [
-            "auth-token",
-            "Referer"
+            "Authorization",
+            "Referer",
+            "token"
         ],
         "TokenGetArguments": [
-            "auth-token"
+            "token"
         ]
     }
 }
