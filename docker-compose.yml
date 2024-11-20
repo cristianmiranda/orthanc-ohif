@@ -27,6 +27,8 @@ services:
       OHIF_PLUGIN_ENABLED: "true"
       AUTHORIZATION_PLUGIN_ENABLED: "true"
       VOLVIEW_PLUGIN_ENABLED: "true"
+    volumes:
+      - ./orthanc/data:/var/lib/orthanc/db
     secrets:
       - orthanc.secret.json
 

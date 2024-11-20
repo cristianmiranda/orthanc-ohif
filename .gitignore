@@ -65,3 +65,4 @@ typings/
 .idea
 .DS_STORE
 orthanc/db
+orthanc/data
