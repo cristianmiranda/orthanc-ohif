@@ -16,8 +16,6 @@ services:
   orthanc:
     image: orthancteam/orthanc
     container_name: orthanc
-    depends_on:
-      - orthanc-db
     ports:
       - 8042:8042
     environment:
@@ -31,6 +29,8 @@ services:
       - ./orthanc/data:/var/lib/orthanc/db
     secrets:
       - orthanc.secret.json
+    depends_on:
+      - orthanc-db
 
   authenticator:
     container_name: authenticator
@@ -53,13 +53,15 @@ services:
       - "3000:80"
     depends_on:
       - orthanc
-      - nginx
 
   nginx:
     image: nginx:latest
-    container_name: nginx-proxy
+    container_name: nginx
     ports:
       - "3080:80"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./nginx/logs:/var/log/nginx
+    depends_on:
+      - orthanc
+      - ohif
