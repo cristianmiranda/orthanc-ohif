@@ -6,7 +6,7 @@
         "/usr/share/orthanc/plugins/"
     ],
     "Authorization": {
-        "WebServiceRootUrl": "http://authenticator:8200/",
+        "WebServiceTokenValidationUrl": "http://authenticator:8200/tokens/validate",
         "TokenHttpHeaders": [
             "Authorization",
             "Referer",
