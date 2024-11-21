@@ -2,6 +2,7 @@
 
 window.config = {
     routerBasename: '/',
+    investigationalUseDialog: false,
     // whiteLabeling: {},
     extensions: [],
     modes: [],
