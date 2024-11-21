@@ -10,9 +10,14 @@ window.config = {
                 {
                     target: '_blank',
                     rel: 'noopener noreferrer',
-                    className: 'text-white underline',
+                    className: 'flex items-center text-white underline',
                 },
-                React.createElement('h5', {}, 'escribeHost DICOM Viewer')
+                [
+                    React.createElement('img', {
+                        src: 'https://www.escribehost.com/images/logo.png',
+                        className: 'ml-2 w-[120px]',
+                    }),
+                ]
             );
         },
     },
