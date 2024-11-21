@@ -45,7 +45,7 @@ services:
       - "8200:8200"
 
   ohif:
-    image: ohif/app:latest
+    image: ohif/app:v3.9.1
     container_name: ohif
     volumes:
       - ./ohif/config.js:/usr/share/nginx/html/app-config.js
