@@ -3,7 +3,19 @@
 window.config = {
     routerBasename: '/',
     investigationalUseDialog: false,
-    // whiteLabeling: {},
+    whiteLabeling: {
+        createLogoComponentFn: function (React) {
+            return React.createElement(
+                'a',
+                {
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    className: 'text-white underline',
+                },
+                React.createElement('h5', {}, 'escribeHost DICOM Viewer')
+            );
+        },
+    },
     extensions: [],
     modes: [],
     customizationService: {},
