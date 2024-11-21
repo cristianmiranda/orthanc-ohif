@@ -1,46 +1,53 @@
 # ⚕ Orthanc + OHIF viewer + Authorization plugin
 
-![Peek 2023-07-06 19-39](https://github.com/cristianmiranda/orthanc-ohif/assets/972572/6c13b5c1-7d6a-42d3-abb3-7cdb5716e714)
+![dicom2](https://github.com/user-attachments/assets/74f829b9-7bfb-4ed1-9ab4-9e01e55bdcc6)
 
 ## 📚 Useful links
 
-- [orthanc-setup-samples (using docker)](https://github.com/orthanc-server/orthanc-setup-samples/tree/master)
-- [Demo DICOM files](https://www.rubomedical.com/dicom_files/index.html)
-- [Orthanc Book - osimis/orthanc](https://book.orthanc-server.com/users/docker-osimis.html)
+### Orthanc
+- [Orthanc Book - orthancteam/orthanc](https://orthanc.uclouvain.be/book/users/docker-orthancteam.html)
 - [Orthanc Book - CORS](https://book.orthanc-server.com/faq/nginx.html?highlight=cors)
 - [Orthanc Book - Authorization](https://book.orthanc-server.com/plugins/authorization.html)
-- [OHIF Viewer - DICOMweb](https://docs.ohif.org/configuration/dataSources/dicom-web#configuration-learn-more)
+
+### OHIF
+- [Config files](https://docs.ohif.org/configuration/configurationFiles)
 - [OHIF Plugin announcement ](https://discourse.orthanc-server.org/t/new-plugin-ohif/3627)
+ 
+### Misc
+- [Demo DICOM files](https://www.rubomedical.com/dicom_files/index.html)
+- [DICOM library](https://www.dicomlibrary.com/)
+- [Demo Online OHIF Viewer](https://dicomviewer.net/local?datasources=dicomlocal)
+- [orthanc-setup-samples (using docker)](https://github.com/orthanc-server/orthanc-setup-samples/tree/master)
 
-### Usage
+## Usage
 
-1. Unzip `orthanc/demo-study.zip`
-
-2. Run the stack
+1. Run the stack
 
 ```bash
 docker-compose up
 ```
 
-3. Upload the study manually (using the top right "Upload" button)
+2. Upload the study manually (using the top right "Upload" button and studies zipped in `orthanc/demo-study.zip`)
 
-### Access OHIF Viewer fromm Orthanc
+### Access Orthanc Explorer & OHIF Viewer
 
-- Explorer: http://localhost:8042/app/explorer.html?auth-token=1234567890
-- Viewer: http://localhost:8042/ohif/viewer?auth-token=1234567890&url=../studies/00945f86-454efb2a-f8390294-623debb1-91ea1a9b/ohif-dicom-json
+- Explorer: http://localhost:8042/app/explorer.html?token=1234567890
+- Viewer: http://localhost:3000/viewer?StudyInstanceUIDs=1.2.840.113619.2.394.3337.1732016885.186.1&token=1234567890
 
-![](https://imgur.com/PxLBxdy.png)
+![image](https://github.com/user-attachments/assets/c3281363-cf61-4a1b-9aa1-916947c24e16)
 
 ### Query studies
 
 ```bash
-curl -H 'auth-token: 1234567890' 'http://localhost:8042/studies'
+curl -H 'token: 1234567890' 'http://localhost:8042/studies'
 
-curl 'http://localhost:8042/studies?auth-token=1234567890'
+curl 'http://localhost:8042/studies?token=1234567890'
 ```
 
-### 🔐 Authorization
+## 🔐 Authorization
 
 Modify `authenticator/server.js` and implement custom validation logic.
 
-See more @ https://book.orthanc-server.com/plugins/authorization.html#web-service
+See more @ 
+- https://book.orthanc-server.com/plugins/authorization.html#web-service
+- https://docs.ohif.org/deployment/authorization/#token-based-authentication-in-url
